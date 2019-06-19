@@ -1,0 +1,8 @@
+--- ./darknet/Makefile	2019-06-17 11:57:13.913622608 +0200
++++ ./darknet/Makefile	2019-06-18 10:38:55.606808115 +0200
+@@ -1,4 +1,4 @@
+-GPU=0
++GPU=1
+ CUDNN=0
+ OPENCV=0
+ OPENMP=0
