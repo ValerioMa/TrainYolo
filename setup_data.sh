@@ -15,7 +15,7 @@ echo "DOWNLOAD COMPATIBLE OPENSSL DISABLED!!"
 echo "======= DONE ======="
 
 echo "======= Download dataset ======="
-curl https://transfer.sh/Ksk0o/test.dat -o data.dat
+curl <data_url> -o data.dat
 openssl enc -aes-256-cbc -d -pass file:./key.txt < data.dat > data.tar.gz
 rm data.dat
 tar xvzf ./data.tar.gz 
