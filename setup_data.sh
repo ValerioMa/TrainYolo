@@ -10,14 +10,15 @@ cd $DIR
 echo "======= Download openssl ======="
 echo "DOWNLOAD COMPATIBLE OPENSSL DISABLED!!"
 #sudo apt-get install make
-#curl https://www.openssl.org/source/openssl-1.0.2l.tar.gz | tar xz && cd openssl-1.0.2l && sudo ./config && sudo make && sudo make install
+#curl https://www.openssl.org/source/openssl-1.0.2l.tar.gz | tar xz && cd openssl-1.0.2l && sudo ./#config && sudo make && sudo make install
 #sudo ln -sf /usr/local/ssl/bin/openssl /usr/bin/openssl
 echo "======= DONE ======="
 
 echo "======= Download dataset ======="
-curl <data_url> -o data.dat
-openssl enc -aes-256-cbc -d -pass file:./key.txt < data.dat > data.tar.gz
-rm data.dat
+#curl https://transfer.sh/Ksk0o/test.dat -o data.dat
+#openssl enc -aes-256-cbc -d -pass file:./key.txt < data.dat > data.tar.gz
+curl https://syncandshare.lrz.de/dl/fi9FhSNEkrDAFMg6DHCZqwyX -o data.tar.gz
+#rm data.dat
 tar xvzf ./data.tar.gz 
 rm data.tar.gz
 echo "======= DONE ======="
@@ -34,7 +35,7 @@ echo mkdir -p $DIR/data/backup/
 mkdir -p $DIR/data/backup/
 echo "======= DONE ======="
 
-echo "======= Creating Training and Validatino set ======="
+echo "======= Creating Training and Validating set ======="
 cd ./data
 
 FILE=./images/imgs_list.txt # file that store all the image list
