@@ -19,7 +19,7 @@ echo "======= Download dataset ======="
 #openssl enc -aes-256-cbc -d -pass file:./key.txt < data.dat > data.tar.gz
 curl https://syncandshare.lrz.de/dl/fi9FhSNEkrDAFMg6DHCZqwyX -o data.tar.gz
 #rm data.dat
-tar xvzf ./data.tar.gz 
+tar xzf ./data.tar.gz 
 rm data.tar.gz
 echo "======= DONE ======="
 
