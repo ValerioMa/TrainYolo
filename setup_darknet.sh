@@ -22,7 +22,7 @@ echo "======= Patch Darknet ======="
 patch ./darknet/Makefile ./patch/make_GPU.patch
 echo "DARKNET PATCH DISABLED"
 #patch ./darknet/examples/detector.c ./patch/backup_freq.patch 
-#cp MagicMakefile ./darknet/Makefile
+cp MagicMakefile ./darknet/Makefile
 echo "======= DONE ======="
 
 echo "======= Compiling darknet ======="
