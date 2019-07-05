@@ -13,5 +13,5 @@ do
 	touch ../data/backup/TrainLOG_$count.txt	
 	echo $doc "in Training!"	
 	./darknet detector train ../data/cones.data $doc
-	../data/yolov3-tiny.conv.15
+	../data/yolov3-tiny.conv.15 -map
 done
