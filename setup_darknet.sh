@@ -14,15 +14,15 @@ sudo apt-get update && apt-get install -y \
 
 # DARKNET
 echo "======= Cloning Darknet ======="
-git clone https://github.com/pjreddie/darknet
+git clone https://github.com/AlexeyAB/darknet.git
 echo "======= DONE ======="
 
 echo "======= Patch Darknet ======="
-echo "GPU PATCH DISABLED"
-#patch ./darknet/Makefile ./patch/make_GPU.patch
-#echo "DARKNET PATCH DISABLED"
-patch ./darknet/examples/detector.c ./patch/backup_freq.patch 
-cp MagicMakefile ./darknet/Makefile
+#echo "GPU PATCH DISABLED"
+patch ./darknet/Makefile ./patch/make_GPU.patch
+echo "DARKNET PATCH DISABLED"
+#patch ./darknet/examples/detector.c ./patch/backup_freq.patch 
+#cp MagicMakefile ./darknet/Makefile
 echo "======= DONE ======="
 
 echo "======= Compiling darknet ======="
