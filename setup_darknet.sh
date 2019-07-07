@@ -10,7 +10,8 @@ sudo apt-get update && apt-get install -y \
   libtool \
   build-essential \
   git \
-  wget
+  wget \
+  cmake
 
 # DARKNET
 echo "======= Cloning Darknet ======="
@@ -27,7 +28,7 @@ echo "======= DONE ======="
 
 echo "======= Compiling darknet ======="
 cd ./darknet
-make
+./build.sh
 echo "======= DONE ======="
 
 cd $DIR
