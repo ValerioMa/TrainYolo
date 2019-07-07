@@ -6,8 +6,8 @@ echo $DIR/darknet
 cd $DIR/darknet
 echo  "======= Starting the training ======="
 # train
-let count = 0
-for doc in ../data/param/*
+let count=0
+for doc in ../cfgfiles/*
 do
 	((count++))	
 	touch ../data/backup/TrainLOG_$count.txt	

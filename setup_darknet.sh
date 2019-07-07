@@ -4,7 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 cd $DIR
 
-sudo apt-get update && apt-get install -y \
+sudo apt-get update && sudo apt-get install -y \
   autoconf \
   automake \
   libtool \
