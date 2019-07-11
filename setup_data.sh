@@ -40,7 +40,7 @@ cd ./data
 
 FILE=./images/imgs_list.txt # file that store all the image list
 img_n=$(wc -l < "$FILE")
-valid_n=800   # NUMBER OF IMAGE USED FOR VALIDATION
+valid_n=$((0.2*$img_n))  # NUMBER OF IMAGE USED FOR VALIDATION
 train_n=$(($img_n-$valid_n))
 
 echo "Total images: " $img_n
