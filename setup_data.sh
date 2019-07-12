@@ -41,18 +41,29 @@ cd ./data
 FILE=./images/imgs_list.txt # file that store all the image list
 img_n=$(wc -l < "$FILE")
 valid_n=$((0.2*$img_n))  # NUMBER OF IMAGE USED FOR VALIDATION
-train_n=$(($img_n-$valid_n))
-
-echo "Total images: " $img_n
-echo "Training images: " $train_n
-echo "Validation images: " $valid_n
 
 # Shuffle the lane of the file and select training and validation
 sort -R $FILE > tmp_shuff.txt
-echo "Creating train.txt"
-head tmp_shuff.txt -n $train_n > train.txt
 echo "Creating validation.txt"
 tail tmp_shuff.txt -n $valid_n > validation.txt
+
+> python image-label-converter.py
+> python data-augmentation.py
+
+for doc in ./data/images/**/*; do   echo $doc >> tmp.txt; done
+img_new=$(wc -l tmp.txt)
+train_n=$(($img_new-$valid_n))
+rm tmp.txt
+
+
+
+echo "Total images: " $img_new
+echo "Training images: " $train_n
+echo "Validation images: " $valid_n
+
+echo "Creating train.txt"
+head tmp_shuff.txt -n $train_n > train.txt
+
 rm tmp_shuff.txt
 echo "======= DONE ======="
 
