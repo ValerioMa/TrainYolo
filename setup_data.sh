@@ -41,7 +41,7 @@ cd ./data
 
 FILE=./images/imgs_list.txt # file that store all the image list
 img_n=$(wc -l < "$FILE")
-valid_n=$((0.2*$img_n))  # NUMBER OF IMAGE USED FOR VALIDATION
+valid_n=$(($img_n/5))  # NUMBER OF IMAGE USED FOR VALIDATION
 
 # Shuffle the lane of the file and select training and validation
 sort -R $FILE > tmp_shuff.txt
