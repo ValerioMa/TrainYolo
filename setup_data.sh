@@ -60,6 +60,7 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)/../scripts
 #virtualenv venv_test
 python ../scripts/image-label-converter.py
 python ../scripts/data-augmentation.py
+python ../scripts/image-label-converter_txt.py
 
 echo "======= Creating Training and Validating set ======="
 
