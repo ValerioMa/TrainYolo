@@ -20,7 +20,7 @@ echo "======= Download dataset ======="
 #curl https://syncandshare.lrz.de/dl/fi9FhSNEkrDAFMg6DHCZqwyX -o data.tar.gz # augmented data
 curl https://syncandshare.lrz.de/dl/fiNF6jnsWMS727fDD4xv3vGv -o data.tar.gz # to be augmented
 #rm data.dat
-tar xzf ./data.tar.gz 
+tar xzf ./data.tar.gz
 rm data.tar.gz
 echo "======= DONE ======="
 
@@ -36,7 +36,7 @@ echo mkdir -p $DIR/data/backup/
 mkdir -p $DIR/data/backup/
 echo "======= DONE ======="
 
-echo "======= Creating Training and Validating set ======="
+echo "======= Creating Validating set ======="
 cd ./data
 
 FILE=./images/imgs_list.txt # file that store all the image list
@@ -44,18 +44,25 @@ img_n=$(wc -l < "$FILE")
 valid_n=$(($img_n/5))  # NUMBER OF IMAGE USED FOR VALIDATION
 
 # Shuffle the lane of the file and select training and validation
-sort -R $FILE > tmp_shuff.txt
+sort -R $FILE > tmp_shuff1.txt
 echo "Creating validation.txt"
-tail tmp_shuff.txt -n $valid_n > validation.txt
+tail -n $valid_n tmp_shuff1.txt > validation.txt
+rm tmp_stuff1.txt
 
-> python image-label-converter.py
-> python data-augmentation.py
+echo "======= Creating Python Environment ======="
 
-for doc in ./data/images/**/*; do   echo $doc >> tmp.txt; done
-img_new=$(wc -l tmp.txt)
+#sudo apt-get install python-pip
+#pip install virtualenv
+#virtualenv venv_test
+python image-label-converter.py
+python data-augmentation.py
+
+echo "======= Creating Training and Validating set ======="
+
+echo " $img_n"
+echo " $valid_n"
+img_new=$((($img_n-$valid_n)*9))
 train_n=$(($img_new-$valid_n))
-rm tmp.txt
-
 
 
 echo "Total images: " $img_new
@@ -63,9 +70,10 @@ echo "Training images: " $train_n
 echo "Validation images: " $valid_n
 
 echo "Creating train.txt"
-head tmp_shuff.txt -n $train_n > train.txt
-
+echo " $train_n"
+head -n $train_n tmp_shuff.txt > train.txt
 rm tmp_shuff.txt
+
 echo "======= DONE ======="
 
 cd $DIR
