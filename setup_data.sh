@@ -54,7 +54,7 @@ tail -n $valid_n tmp_shuff.txt > validation.txt
 
 echo "======= Creating Python Environment ======="
 
-export PYTHONPATH=$PYTHONPATH:$(pwd)/..
+export PYTHONPATH=$PYTHONPATH:$(pwd)/../scripts
 #sudo apt-get install python-pip
 #pip install virtualenv
 #virtualenv venv_test
