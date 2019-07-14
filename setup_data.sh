@@ -39,7 +39,7 @@ echo "======= DONE ======="
 echo "======= Creating Validating set ======="
 cd ./data
 
-FILE=./images/imgs_list.txt # file that store all the image list
+FILE=../imgs_list.txt # file that store all the image list
 touch $FILE
 img_n=$(wc -l < "$FILE")
 valid_n=$(($img_n/5))  # NUMBER OF IMAGE USED FOR VALIDATION
