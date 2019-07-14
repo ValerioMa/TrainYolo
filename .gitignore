@@ -9,6 +9,8 @@ key.txt
 *.exe
 *.o
 *.so
+*.pyc
+__pycache__/
 
 # Packages #
 ############
