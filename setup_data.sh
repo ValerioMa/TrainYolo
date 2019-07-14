@@ -40,17 +40,21 @@ echo "======= Creating Validating set ======="
 cd ./data
 
 FILE=./images/imgs_list.txt # file that store all the image list
+touch $FILE
 img_n=$(wc -l < "$FILE")
 valid_n=$(($img_n/5))  # NUMBER OF IMAGE USED FOR VALIDATION
 
 # Shuffle the lane of the file and select training and validation
-sort -R $FILE > tmp_shuff1.txt
+touch tmp_shuff.txt
+touch validation.txt
+sort -R $FILE > tmp_shuff.txt
 echo "Creating validation.txt"
-tail -n $valid_n tmp_shuff1.txt > validation.txt
-rm tmp_stuff1.txt
+tail -n $valid_n tmp_shuff.txt > validation.txt
+#rm tmp_shuff.txt
 
 echo "======= Creating Python Environment ======="
 
+export PYTHONPATH=$PYTHONPATH:$(pwd)/..
 #sudo apt-get install python-pip
 #pip install virtualenv
 #virtualenv venv_test
@@ -71,6 +75,8 @@ echo "Validation images: " $valid_n
 
 echo "Creating train.txt"
 echo " $train_n"
+#touch tmp_shuff.txt
+touch train.txt
 head -n $train_n tmp_shuff.txt > train.txt
 rm tmp_shuff.txt
 
