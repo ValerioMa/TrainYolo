@@ -18,7 +18,7 @@ from data_aug.bbox_util import *
 # In[2]:
 
 
-base_url = "{}/images/".format(os.path.dirname(os.path.realpath(__file__)))
+base_url = "{}/../data/images/".format(os.path.dirname(os.path.realpath(__file__)))
 
 
 # In[3]:
@@ -151,7 +151,7 @@ def get_label_files(dir_path):
     files = []
     for r, d, f in os.walk(dir_path):
         for file in f:
-            if '.txt' in file:
+            if '.labels' in file:
                 files.append(os.path.join(r, file))
     
     return files
@@ -159,15 +159,12 @@ def get_label_files(dir_path):
 
 # In[9]:
 
-print(base_url)
-#print(os.walk(base_url))
+
 for subdir, dirs, files in os.walk(base_url):
-    print(subdir)
     if base_url != subdir:
         label_files_names =  get_label_files(subdir)
-        print(label_files_names)
         for label_file_name in label_files_names:
-            train_file_name = label_file_name.split(".txt")[0] + ".jpg"
+            train_file_name = label_file_name.split(".labels")[0]
             label_file_name = "{}.parsed_labels".format(train_file_name)
             
             original_label_file = open(label_file_name, "r")

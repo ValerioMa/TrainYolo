@@ -58,8 +58,8 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)/../scripts
 #sudo apt-get install python-pip
 #pip install virtualenv
 #virtualenv venv_test
-python image-label-converter.py
-python data-augmentation.py
+python ../scripts/image-label-converter.py
+python ../scripts/data-augmentation.py
 
 echo "======= Creating Training and Validating set ======="
 

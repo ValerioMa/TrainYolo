@@ -15,7 +15,7 @@ import os
 # In[2]:
 
 
-base_url = "{}/images/".format(os.path.dirname(os.path.realpath(__file__)))
+base_url = "{}/../data/images/".format(os.path.dirname(os.path.realpath(__file__)))
 
 
 # In[3]:
@@ -100,7 +100,7 @@ def get_label_files(dir_path):
     files = []
     for r, d, f in os.walk(dir_path):
         for file in f:
-            if '.txt' in file:
+            if '.labels' in file:
                 files.append(os.path.join(r, file))
     
     return files
@@ -143,7 +143,7 @@ for subdir, dirs, files in os.walk(base_url):
     if base_url != subdir:
         label_files_names =  get_label_files(subdir)
         for label_file_name in label_files_names:
-            train_image_file_name = label_file_name.split(".txt")[0] + "jpg"
+            train_image_file_name = label_file_name.split(".labels")[0]
             original_label_file = open(label_file_name, "r")
             original_label_file_data = original_label_file.read()
             original_label_file.close()
