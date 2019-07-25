@@ -18,7 +18,7 @@ from data_aug.bbox_util import *
 # In[2]:
 
 
-base_url = "{}/../data/images/".format(os.path.dirname(os.path.realpath(__file__)))
+base_url = "{}/images/".format(os.getcwd())
 
 
 # In[3]:

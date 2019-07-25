@@ -15,7 +15,8 @@ import os
 # In[2]:
 
 
-base_url = "{}/data/images/".format(os.path.dirname(os.path.realpath(__file__)))
+base_url = "{}/images/".format(os.getcwd())
+print(base_url)
 
 
 # In[3]:
@@ -188,27 +189,27 @@ def store_parsed_label_data(train_image_file_name, image_labels):
 
 
 for subdir, dirs, files in os.walk(base_url):
-    if base_url != subdir:
-        label_files_names =  get_label_files(subdir)
-        for label_file_name in label_files_names:
-            train_image_file_name = label_file_name.split(".labels")[0]
-            original_label_file = open(label_file_name, "r")
-            original_label_file_data = original_label_file.read()
-            original_label_file.close()
-            original_label_json_data = json.loads(original_label_file_data)
-            
-            image_labels = []
-            '''
-            for i in range(len(original_label_json_data["objects"])):
-                min_x_normalized, min_y_normalized, min_x, min_y, bounding_box_width, bounding_box_height, bounding_box_width_unnnormalized, bounding_box_height_unnnormalized, cls_index, cls_name = extract_training_labels(original_label_json_data["objects"][i], train_image_file_name)
-                image_labels.append((min_x_normalized, min_y_normalized, min_x, min_y, bounding_box_width, bounding_box_height, bounding_box_width_unnnormalized, bounding_box_height_unnnormalized, cls_index, cls_name))
-            '''
-            for i in range(len(original_label_json_data["labels"])):
-                min_x_normalized, min_y_normalized, min_x, min_y, bounding_box_width, bounding_box_height, bounding_box_width_unnnormalized, bounding_box_height_unnnormalized, cls_index, cls_name = extract_training_labels_new(
-                    original_label_json_data["labels"][i], train_image_file_name)
-                image_labels.append((min_x_normalized, min_y_normalized, min_x, min_y, bounding_box_width,
-                                     bounding_box_height, bounding_box_width_unnnormalized,
-                                     bounding_box_height_unnnormalized, cls_index, cls_name))
+    label_files_names = get_label_files(subdir)
+    for label_file_name in label_files_names:
+        train_image_file_name = label_file_name.split(".labels")[0]
+        original_label_file = open(label_file_name, "r")
+        original_label_file_data = original_label_file.read()
+        original_label_file.close()
+        original_label_json_data = json.loads(original_label_file_data)
 
-            store_parsed_label_data(train_image_file_name, image_labels)
+        image_labels = []
+        '''
+        for i in range(len(original_label_json_data["objects"])):
+            min_x_normalized, min_y_normalized, min_x, min_y, bounding_box_width, bounding_box_height, bounding_box_width_unnnormalized, bounding_box_height_unnnormalized, cls_index, cls_name = extract_training_labels(original_label_json_data["objects"][i], train_image_file_name)
+            image_labels.append((min_x_normalized, min_y_normalized, min_x, min_y, bounding_box_width, bounding_box_height, bounding_box_width_unnnormalized, bounding_box_height_unnnormalized, cls_index, cls_name))
+        '''
+        for i in range(len(original_label_json_data["labels"])):
+            min_x_normalized, min_y_normalized, min_x, min_y, bounding_box_width, bounding_box_height, bounding_box_width_unnnormalized, bounding_box_height_unnnormalized, cls_index, cls_name = extract_training_labels_new(
+                original_label_json_data["labels"][i], train_image_file_name)
+            image_labels.append((min_x_normalized, min_y_normalized, min_x, min_y, bounding_box_width,
+                                 bounding_box_height, bounding_box_width_unnnormalized,
+                                 bounding_box_height_unnnormalized, cls_index, cls_name))
+
+
+        store_parsed_label_data(train_image_file_name, image_labels)
 

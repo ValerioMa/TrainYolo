@@ -18,7 +18,7 @@ echo "======= Download dataset ======="
 #curl https://transfer.sh/Ksk0o/test.dat -o data.dat
 #openssl enc -aes-256-cbc -d -pass file:./key.txt < data.dat > data.tar.gz
 #curl https://syncandshare.lrz.de/dl/fi9FhSNEkrDAFMg6DHCZqwyX -o data.tar.gz # augmented data
-curl https://syncandshare.lrz.de/dl/fiNF6jnsWMS727fDD4xv3vGv -o data.tar.gz # to be augmented
+#curl https://syncandshare.lrz.de/dl/fiUKmjiaSAtJytRLij7mMHQe -o data.tar.gz # to be augmented
 #rm data.dat
 tar xzf ./data.tar.gz
 rm data.tar.gz
@@ -39,7 +39,7 @@ echo "======= DONE ======="
 echo "======= Creating Validating set ======="
 cd ./data
 
-FILE=../imgs_list.txt # file that store all the image list
+FILE=../data/images/imgs_list.txt # file that store all the image list
 touch $FILE
 img_n=$(wc -l < "$FILE")
 valid_n=$(($img_n/5))  # NUMBER OF IMAGE USED FOR VALIDATION
@@ -50,36 +50,33 @@ touch validation.txt
 sort -R $FILE > tmp_shuff.txt
 echo "Creating validation.txt"
 tail -n $valid_n tmp_shuff.txt > validation.txt
-#rm tmp_shuff.txt
+rm tmp_shuff.txt
 
 echo "======= Creating Python Environment ======="
 
 export PYTHONPATH=$PYTHONPATH:$(pwd)/../scripts
-#sudo apt-get install python-pip
-#pip install virtualenv
-#virtualenv venv_test
 python ../scripts/image-label-converter.py
 python ../scripts/data-augmentation.py
 python ../scripts/image-label-converter_txt.py
 
 echo "======= Creating Training and Validating set ======="
 
-echo " $img_n"
-echo " $valid_n"
-img_new=$((($img_n-$valid_n)*9))
-train_n=$(($img_new-$valid_n))
+echo "Creating train.txt"
 
+touch tmp_shuff.txt
+touch train.txt
+ls ../data/images/*.jpg > tmp_shuff.txt
+grep -Fvxf validation.txt tmp_shuff.txt > train.txt
+FILE2=../data/validation.txt # file that store all the new images
+touch $FILE2
+img_new=$(wc -l < "$FILE")
+rm tmp_shuff.txt
+
+train_n=$(($img_new-$valid_n))
 
 echo "Total images: " $img_new
 echo "Training images: " $train_n
 echo "Validation images: " $valid_n
-
-echo "Creating train.txt"
-echo " $train_n"
-#touch tmp_shuff.txt
-touch train.txt
-head -n $train_n tmp_shuff.txt > train.txt
-rm tmp_shuff.txt
 
 echo "======= DONE ======="
 
