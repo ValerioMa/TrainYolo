@@ -18,7 +18,7 @@ echo "======= Download dataset ======="
 #curl https://transfer.sh/Ksk0o/test.dat -o data.dat
 #openssl enc -aes-256-cbc -d -pass file:./key.txt < data.dat > data.tar.gz
 #curl https://syncandshare.lrz.de/dl/fi9FhSNEkrDAFMg6DHCZqwyX -o data.tar.gz # augmented data
-#curl https://syncandshare.lrz.de/dl/fiUKmjiaSAtJytRLij7mMHQe -o data.tar.gz # to be augmented
+curl https://syncandshare.lrz.de/dl/fiUKmjiaSAtJytRLij7mMHQe -o data.tar.gz # to be augmented
 #rm data.dat
 tar xzf ./data.tar.gz
 rm data.tar.gz
